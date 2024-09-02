@@ -1,4 +1,13 @@
-package fr.orleans.m1.wsi.versements.facade.exception;
+package fr.orleans.m1.wsi.versements.exception;
 
-public class GlobalExceptionHandler {
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler
+{
+    public ResponseEntity<String> handleRuntimeExcetion(RuntimeException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

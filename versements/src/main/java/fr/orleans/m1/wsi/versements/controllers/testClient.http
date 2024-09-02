@@ -1,0 +1,15 @@
+POST http://localhost:8080/api/versement/add-client
+Content-Type: application/json
+{
+   "name":"Oumaima",
+   "firstName":"Meskini",
+   "jobs":"Doctor",
+   "phone":"0782566599",
+   "email":"oumaimameskini@gmail.com"
+}
+
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+###
