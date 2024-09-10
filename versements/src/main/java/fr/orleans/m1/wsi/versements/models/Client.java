@@ -1,10 +1,11 @@
 package fr.orleans.m1.wsi.versements.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -13,13 +14,19 @@ public class Client
 {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
     private String firstName;
     private String jobs;
     private String phone;
+
+    @Column(unique = true)
     private String email;
+
+    @OneToMany(mappedBy = "client")
+    @JsonManagedReference
+    private List<Depot> depot;
 
 }

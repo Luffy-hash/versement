@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_versement/models/client.dart';
 import 'package:front_versement/services/apiClientService.dart';
+import 'package:front_versement/views/singleViewClient.dart';
 
 class ClientView extends StatefulWidget {
   const ClientView({super.key});
@@ -32,8 +33,18 @@ class _ClientViewState extends State<ClientView> {
                   itemCount: mesClients?.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text(mesClients![index].firstName),
+                      title: Text(mesClients![index].name),
                       subtitle: Text(mesClients[index].email),
+                      trailing: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SingleViewClient(
+                                      email: mesClients[index].email)));
+                        },
+                        child: const Text("voir plus"),
+                      ),
                     );
                   });
             } else if (snapshot.hasError) {

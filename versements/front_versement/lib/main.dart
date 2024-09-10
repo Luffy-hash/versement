@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Versement Client'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -38,14 +39,21 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Colors.greenAccent,
         title: Text(widget.title),
+        centerTitle: true,
+        actions: const [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Icon(Icons.menu),
+          )
+        ],
       ),
-      body: Center(
+      body: const Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          ClientView(),
+          Expanded(child: ClientView()),
         ],
       )),
     );

@@ -39,11 +39,10 @@ public interface ClientInterface
 
     /**
      *
-     * @param idClient
-     * @param client
+     * @param emailClient
      * @return
      */
-    Client myUniqueClient(Long idClient, Client client);
+    Client myUniqueClient(String emailClient);
 
     // rechercher un client
 }

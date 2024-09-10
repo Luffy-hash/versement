@@ -2,11 +2,12 @@ import 'dart:ffi';
 
 class Client {
   // defini nos champs qui sont requis tous.
-  final Long id;
+  final int id;
   final String name;
   final String firstName;
   final String phone;
   final String email;
+  final String jobs;
 
   // on construit le client
   Client(
@@ -14,7 +15,8 @@ class Client {
       required this.name,
       required this.firstName,
       required this.phone,
-      required this.email});
+      required this.email,
+      required this.jobs});
 
   // mapper du json => renvoyer du json
   factory Client.fromJson(Map<String, dynamic> json) {
@@ -23,7 +25,8 @@ class Client {
         name: json['name'],
         firstName: json['firstName'],
         phone: json['phone'],
-        email: json['email']);
+        email: json['email'],
+        jobs: json['jobs']);
   }
 
   // envoyer du json
@@ -33,7 +36,8 @@ class Client {
       'name': name,
       'firstName': firstName,
       'phone': phone,
-      'email': email
+      'email': email,
+      'jobs': jobs
     };
   }
 }

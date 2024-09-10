@@ -1,20 +1,27 @@
 package fr.orleans.m1.wsi.versements.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.Date;
+import java.util.Set;
+
+@Setter
+@Getter
 @Entity
-public class depot
+public class Depot
 {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private Date date;
+    private Long montant;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @ManyToOne
+    @JsonBackReference
+    private Client client;
 
-    public Long getId() {
-        return id;
-    }
 }
