@@ -33,8 +33,11 @@ class _ClientViewState extends State<ClientView> {
                   itemCount: mesClients?.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text(mesClients![index].name),
+                      title: Text(
+                          "${mesClients![index].name} ${mesClients[index].firstName} "),
                       subtitle: Text(mesClients[index].email),
+                      leading: Image.network(
+                          "https://as1.ftcdn.net/v2/jpg/05/66/32/22/1000_F_566322234_dSK1t1yBKcBP3TWJOD4qTDKVnDjkjJo4.jpg"),
                       onTap: () {
                         Navigator.push(
                             context,
@@ -45,7 +48,9 @@ class _ClientViewState extends State<ClientView> {
                     );
                   });
             } else if (snapshot.hasError) {
-              return Text(snapshot.error.toString());
+              return const Center(
+                  child: Text("J'ai pas trouvé de client!",
+                      style: TextStyle(fontSize: 18)));
             }
             return const Center(child: CircularProgressIndicator());
           }),

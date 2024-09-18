@@ -21,6 +21,7 @@ public class Client
     private String firstName;
     private String jobs;
     private String phone;
+    private String image;
 
     @Column(unique = true)
     private String email;

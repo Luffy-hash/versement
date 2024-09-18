@@ -28,19 +28,26 @@ class _MyDepotListForCustumerState extends State<MyDepotListForCustumer> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Depot> myDepotList = snapshot.data!;
-            print(myDepotList);
             return ListView.builder(
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(DateFormat('dd-MM-yyyy')
+                    title: Text(
+                      "${myDepotList[index].mount.toString()} euros",
+                      style: const TextStyle(
+                          fontSize: 13, fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(DateFormat('dd-MM-yyyy')
                         .format(myDepotList[index].date)),
-                    subtitle: Text(myDepotList[index].mount.toString()),
                     leading: const Icon(Icons.label),
                   );
                 },
                 itemCount: myDepotList.length);
           } else if (snapshot.hasError) {
-            return const Text("pas de versement trouver");
+            return const Center(
+                child: Text(
+              "J'ai pas trouvé de versement",
+              style: TextStyle(fontSize: 18),
+            ));
           } else {
             return const CircularProgressIndicator();
           }

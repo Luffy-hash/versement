@@ -1,5 +1,7 @@
+import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:front_versement/views/clientView.dart';
+import 'package:front_versement/views/helpersViews/bottomMenuViews.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Versement Client'),
+      home: const MyHomePage(title: 'App Name'),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -37,25 +39,44 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return BackdropScaffold(
+      appBar: BackdropAppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.greenAccent,
         title: Text(widget.title),
-        centerTitle: true,
         actions: const [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Icon(Icons.menu),
+            child: Icon(Icons.search_sharp),
           )
         ],
       ),
-      body: const Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Expanded(child: ClientView()),
-        ],
-      )),
+      subHeader: const Padding(
+        padding: EdgeInsets.all(15.0),
+        child: Text(
+          "Mes clients",
+          style: TextStyle(
+            fontSize: 25,
+          ),
+        ),
+      ),
+      backLayer: Container(color: Colors.greenAccent),
+      frontLayer: Container(
+        color: Colors.white70,
+        child: const Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Expanded(child: ClientView()),
+          ],
+        )),
+      ),
+      bottomNavigationBar: const BottomMenuView(),
+      floatingActionButton: FloatingActionButton.small(
+        onPressed: () {},
+        backgroundColor: Colors.greenAccent,
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

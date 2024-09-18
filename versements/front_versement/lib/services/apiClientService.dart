@@ -5,7 +5,7 @@ import 'package:front_versement/models/depot.dart';
 import 'package:http/http.dart' as http;
 
 class ApiClientService {
-  final String baseUrl = "http://10.192.20.58:8584/api/versement/client";
+  final String baseUrl = "http://10.245.96.4:8584/api/versement/client";
 
   // Renvoie tous mes clients inscrit
   Future<List<Client>> myClients() async {

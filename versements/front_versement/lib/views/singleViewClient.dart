@@ -1,7 +1,8 @@
+import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:front_versement/models/client.dart';
-import 'package:front_versement/models/depot.dart';
 import 'package:front_versement/services/apiClientService.dart';
+import 'package:front_versement/views/helpersViews/bottomMenuViews.dart';
 import 'package:front_versement/views/myDepotListForCustumer.dart';
 
 class SingleViewClient extends StatefulWidget {
@@ -32,62 +33,52 @@ class _SingleViewClientState extends State<SingleViewClient>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(
+      length: 2,
+      child: BackdropScaffold(
         appBar: AppBar(
           backgroundColor: Colors.greenAccent,
-          title: const Text("Front_versement"),
-          centerTitle: true,
+          title: const Text("Depôt"),
           actions: const [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Icon(Icons.menu),
+              child: Icon(Icons.search_sharp),
             )
           ],
-          bottom: TabBar(
-              controller: _tabController,
-              indicatorColor: Colors.grey,
-              tabs: const [
-                Tab(text: 'Mois en cours'),
-                Tab(text: 'Historiques')
-              ]),
+          bottom: const TabBar(indicatorColor: Colors.grey, tabs: [
+            Tab(text: 'Mois en cours'),
+            Tab(text: 'Historiques'),
+          ]),
         ),
-        body: SizedBox(
+        backLayer: Container(color: Colors.greenAccent),
+        frontLayer: SizedBox(
             child: FutureBuilder<Client>(
                 future: futureClient,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const CircularProgressIndicator();
+                    return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
-                    return Text(snapshot.error.toString());
+                    return const Center(
+                        child: Text("J'ai pas trouvé de depôt !"));
                   } else if (snapshot.hasData) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    return TabBarView(
                       children: <Widget>[
-                        SizedBox(height: 16, child: Text(snapshot.data!.name)),
-                        const Text(
-                          "Mes versements",
-                          textAlign: TextAlign.left,
-                        ),
-                        const Divider(color: Colors.black12),
-                        Expanded(
-                          child:
-                              TabBarView(controller: _tabController, children: [
-                            SizedBox(
-                                child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [],
-                            )),
-                            SizedBox(
-                              child:
-                                  MyDepotListForCustumer(email: widget.email),
-                            ),
-                          ]),
-                        )
+                        const SizedBox(
+                            child: Center(child: Text("blablabla ..."))),
+                        SizedBox(
+                            child: SizedBox(
+                          child: MyDepotListForCustumer(email: widget.email),
+                        )),
                       ],
                     );
                   } else {
-                    return const Text("Pas de client trouvé");
+                    return const Center(
+                        child: Text("Pas de client trouvé",
+                            style: TextStyle(fontSize: 18)));
                   }
-                })));
+                })),
+        bottomNavigationBar: const BottomMenuView(),
+      ),
+    );
   }
 }
