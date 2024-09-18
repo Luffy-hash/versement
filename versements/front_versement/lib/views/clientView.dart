@@ -35,22 +35,19 @@ class _ClientViewState extends State<ClientView> {
                     return ListTile(
                       title: Text(mesClients![index].name),
                       subtitle: Text(mesClients[index].email),
-                      trailing: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SingleViewClient(
-                                      email: mesClients[index].email)));
-                        },
-                        child: const Text("voir plus"),
-                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SingleViewClient(
+                                    email: mesClients[index].email)));
+                      },
                     );
                   });
             } else if (snapshot.hasError) {
               return Text(snapshot.error.toString());
             }
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }),
     );
   }

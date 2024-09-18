@@ -5,7 +5,7 @@ import 'package:front_versement/models/depot.dart';
 import 'package:http/http.dart' as http;
 
 class ApiClientService {
-  final String baseUrl = "http://10.192.20.58:8080/api/versement/client";
+  final String baseUrl = "http://10.192.20.58:8584/api/versement/client";
 
   // Renvoie tous mes clients inscrit
   Future<List<Client>> myClients() async {
@@ -26,7 +26,7 @@ class ApiClientService {
         throw Exception("pas de clients trouvé!");
       }
     } catch (e) {
-      throw Exception("Erreur json");
+      throw Exception(e.toString());
     }
   }
 
@@ -40,7 +40,6 @@ class ApiClientService {
       if (response.statusCode == 200) {
         dynamic body = json.decode(response.body);
         Client myClient = Client.fromJson(body);
-
         return myClient;
       }
       // sinon on leve l'exception
@@ -58,19 +57,15 @@ class ApiClientService {
       // parser l'url de l'api
       final response =
           await http.get(Uri.parse("$baseUrl/$emailClient/versements"));
-      if (response.statusCode == 200) {
+      // print(response.body);
+      if (response.statusCode == 200 && response.body.isNotEmpty) {
         List<dynamic> data = json.decode(response.body);
-
-        for (var element in data) {
-          print(element);
-        }
-
-        return data.map((json) => Depot.fromJson(json)).toList();
+        return data.map((item) => Depot.fromJson(item)).toList();
       } else {
         throw Exception("Pas de versement.");
       }
     } catch (e) {
-      throw Exception("Erreur json ");
+      throw Exception(" ${e.toString()} ");
     }
   }
 }

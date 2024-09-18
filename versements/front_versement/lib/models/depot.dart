@@ -6,6 +6,9 @@ class Depot {
   Depot({required this.id, required this.date, required this.mount});
 
   factory Depot.fromJson(Map<String, dynamic> json) {
-    return Depot(id: json['id'], date: json['date'], mount: json['mount']);
+    return Depot(
+        id: json['id'],
+        date: DateTime.parse(json['date']),
+        mount: json['montant']);
   }
 }

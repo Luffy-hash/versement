@@ -2,7 +2,7 @@ import 'dart:ffi';
 
 class Client {
   // defini nos champs qui sont requis tous.
-  final int id;
+  final int? id;
   final String name;
   final String firstName;
   final String phone;
