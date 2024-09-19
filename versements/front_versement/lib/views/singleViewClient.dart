@@ -4,6 +4,7 @@ import 'package:front_versement/models/client.dart';
 import 'package:front_versement/services/apiClientService.dart';
 import 'package:front_versement/views/helpersViews/bottomMenuViews.dart';
 import 'package:front_versement/views/myDepotListForCustumer.dart';
+import 'package:front_versement/views/myDepotListForCustumerMounth.dart';
 
 class SingleViewClient extends StatefulWidget {
   final String email;
@@ -16,19 +17,12 @@ class SingleViewClient extends StatefulWidget {
 class _SingleViewClientState extends State<SingleViewClient>
     with SingleTickerProviderStateMixin {
   late Future<Client> futureClient;
-  late TabController _tabController;
+  late List<Client> filteredClientsList = [];
 
   @override
   void initState() {
-    super.initState();
     futureClient = ApiClientService().singleClient(widget.email);
-    _tabController = TabController(length: 2, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
+    super.initState();
   }
 
   @override
@@ -63,8 +57,10 @@ class _SingleViewClientState extends State<SingleViewClient>
                   } else if (snapshot.hasData) {
                     return TabBarView(
                       children: <Widget>[
-                        const SizedBox(
-                            child: Center(child: Text("blablabla ..."))),
+                        SizedBox(
+                            child: Center(
+                                child: MyDepotListForCustumerMounth(
+                                    email: widget.email))),
                         SizedBox(
                             child: SizedBox(
                           child: MyDepotListForCustumer(email: widget.email),

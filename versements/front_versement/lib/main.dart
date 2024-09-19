@@ -2,6 +2,7 @@ import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:front_versement/views/clientView.dart';
 import 'package:front_versement/views/helpersViews/bottomMenuViews.dart';
+import 'package:front_versement/views/user/registerForm.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'App Name'),
+      home: const RegisterForm(), // const MyHomePage(title: 'App Name'),
       debugShowCheckedModeBanner: false,
     );
   }

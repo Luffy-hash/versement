@@ -44,7 +44,6 @@ public class ClientInterfaceImpl implements ClientInterface
         return clients.isEmpty() ? Optional.empty() : Optional.of(clients);
 
     }
-
     @Override
     public Client myUniqueClient(String emailClient) {
         // recupérer le client

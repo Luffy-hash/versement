@@ -16,18 +16,18 @@ class _MyDepotListForCustumerState extends State<MyDepotListForCustumer> {
 
   @override
   void initState() {
-    // listOfDepot = ApiClientService().getDepotListForClient(widget.email);
+    listOfDepot = ApiClientService().getDepotListForClient(widget.email);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: ApiClientService()
-            .getDepotListForClient(widget.email), //listOfDepot,
+        future: listOfDepot,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Depot> myDepotList = snapshot.data!;
+
             return ListView.builder(
                 itemBuilder: (context, index) {
                   return ListTile(
